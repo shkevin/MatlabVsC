@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Commands specific to the job scheduler requesting resources, naming your job, and setting up email alerts regarding job status.
+#PBS -l nodes=16:ppn=8
+#PBS -l walltime=24:0:00
+#PBS -N calcFlOPS
+#PBS -S /bin/bash
+#PBS -j oe
+#PBS -m bae
+#PBS -M shkevin@unm.edu
+#PBS -V
+
+# Change to the directory that you submitted your PBS script from.
+cd $PBS_O_WORKDIR/users/shkevin/assignment3/Matlab_Code
+
+# Loading the MATLAB software module. The specific module name is system dependent.
+module load matlab/R2017a
+
+# Calling MATLAB in batch mode to run your program.
+matlab -nodisplay -nosplash -nojvm -r calcFLOPS
+
+matlab -nodisplay -nosplash -nojvm \
+    -r "maxNumCompThreads(1); calcFLOPS"
