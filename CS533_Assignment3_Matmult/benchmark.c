@@ -202,8 +202,8 @@ int main(int argc, char **argv)
     int numExperiment = 3;
     double cputime = 0;
     double walltime = 0;
-    char cpu_filename[150];
-    char wall_filename[150];
+    char cpu_filename[200];
+    char wall_filename[200];
 
     test_sizes = default_sizes;
     nsizes = sizeof(default_sizes) / sizeof(default_sizes[0]);
@@ -222,11 +222,11 @@ int main(int argc, char **argv)
     sprintf(exp_str, "%s/%s", parent, "experimentInfo");
     create_folder(exp_str);
 
-    char cpu_time[150];
+    char cpu_time[200];
     sprintf(cpu_time, "%s/%s", exp_str, "cputime");
     create_folder(cpu_time);
 
-    char walltimeFold[150];
+    char walltimeFold[200];
     sprintf(walltimeFold, "%s/%s", exp_str, "walltime");
     create_folder(walltimeFold);
 
