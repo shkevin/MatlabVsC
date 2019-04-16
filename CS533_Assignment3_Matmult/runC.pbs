@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Commands specific to the job scheduler requesting resources, naming your job, and setting up email alerts regarding job status.
-#PBS -l nodes=16:ppn=8
-#PBS -l walltime=24:0:00
+#PBS -l nodes=80:ppn=8
+#PBS -l walltime=48:0:00
 #PBS -N calcFlOPS
 #PBS -S /bin/bash
 #PBS -j oe
@@ -18,6 +18,24 @@ module load gsl-2.3-gcc-7.1.0-oqydlph
 module load gnu8/8.2.0
 
 # Run all the comparable algorithms
-make
+./benchmark_naive "naive" &
 
-./
+./benchmark_blocked "blocked" &
+
+./benchmark_genvect "genvect" &
+
+./benchmark_blas "blas" &
+
+./benchmark_autovect "autovect" &
+
+./benchmark_row "row" &
+
+./benchmark_copy "copy" &
+
+./benchmark_col "col" &
+
+./benchmark_copy "copy" &
+
+./benchmark_rb "rb" &
+
+wait
