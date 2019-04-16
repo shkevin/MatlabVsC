@@ -15,9 +15,8 @@ a = -1;
 b = 1;
 
 % Randomly shuffle sizes
-% shuffle = @(v)v(randperm(numel(v)));
-% randSizes = shuffle(sizes);
-randSizes = sizes;
+shuffle = @(v)v(randperm(numel(v)));
+randSizes = shuffle(sizes);
 
 experiment = struct();
 experiment.times = cell(length(sizes),1);
@@ -32,8 +31,8 @@ if toPlot
     figure, hold on
 end
 
-tic;
-for s = randSizes(1:26)
+total = tic;
+for s = randSizes
     times = zeros(length(iterations),1);
     seconds = 0;
     sizeIndex = find(sizes == s);
@@ -76,7 +75,7 @@ for s = randSizes(1:26)
     experiment.times{sizeIndex} = times;
 end
 
-experiment.runTime = toc;
+experiment.runTime = toc(total);
 % x = [1 iterations];
 % p = polyfit(x,times',4);
 % f1 = polyval(p,x);
