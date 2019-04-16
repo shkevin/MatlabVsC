@@ -209,8 +209,8 @@ int main(int argc, char **argv)
     nsizes = sizeof(default_sizes) / sizeof(default_sizes[0]);
     nmax = test_sizes[nsizes - 1];
 
-    int iterations[] = {500,308,307,307,153,153,76,76,38,38,38,32,31,25,25,24,23,20,16,16,15,12,
-        12,12,11,9,9,6,6,6,4,4,1,1};
+    int iterations[] = {1000,616,615,615,307,307,153,153,76,76,76,64,63,51,51,
+          48,47,41,32,32,31,25,25,25,22,19,19,12,12,12,9,9,3,3};
 
     int iteration = 0;
 

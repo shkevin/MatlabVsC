@@ -8,7 +8,7 @@ numExperiment = 50;
 sizes = [31, 32, 96, 97, 127, 128, 129, 191, 192, 229, 255, 256, 257,...
          319, 320, 321, 417, 479, 480, 511, 512, 639, 640, 767, 768, 769,...
          1538, 1539, 3078, 3079, 6158, 6159, 6160, 10000];
-iterations = flip(floor(sizes./20));
+iterations = flip(floor(sizes/10));
 seconds = 0;
 
 a = -1;
@@ -85,6 +85,14 @@ if toPlot
     title('Asymptotic Growth')
     hold off
 end
+
+%Save the simulation based off aquisition date.
+defaultName = datetime;
+defaultName = strtrim(regexprep(string(defaultName),{'-',' ',':'},{'','_',''}));
+
+defaultFolder = './Matlab_Code/';
+fullfileName = strcat(defaultFolder,defaultName);
+save(strcat(fullfileName,'.mat'), 'experiment');
 
 end
 
