@@ -3,7 +3,7 @@
 # Commands specific to the job scheduler requesting resources, naming your job, and setting up email alerts regarding job status.
 #PBS -l nodes=80:ppn=8
 #PBS -l walltime=48:0:00
-#PBS -N calcFlOPS
+#PBS -N runC
 #PBS -S /bin/bash
 #PBS -j oe
 #PBS -m bae
