@@ -202,8 +202,8 @@ int main(int argc, char **argv)
     int numExperiment = 3;
     double cputime = 0;
     double walltime = 0;
-    char cpu_filename[200];
-    char wall_filename[200];
+    char cpu_filename[300];
+    char wall_filename[300];
 
     test_sizes = default_sizes;
     nsizes = sizeof(default_sizes) / sizeof(default_sizes[0]);
