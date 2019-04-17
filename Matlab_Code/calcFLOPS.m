@@ -1,5 +1,7 @@
 function experiment = calcFLOPS(toPlot)
 
+maxNumCompThreads(1);
+
 if ~exist('toPlot','var') || isempty(toPlot)
     toPlot = false;
 end
