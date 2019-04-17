@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Commands specific to the job scheduler requesting resources, naming your job, and setting up email alerts regarding job status.
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=48:0:00
+#PBS -N col
+#PBS -S /bin/bash
+#PBS -j oe
+#PBS -m bae
+#PBS -M shkevin@unm.edu
+#PBS -V
+
+# Change to the directory that you submitted your PBS script from.
+cd $PBS_O_WORKDIR
+
+module load openblas-0.2.20-gcc-4.8.5-gqori4j
+module load gsl-2.3-gcc-7.1.0-oqydlph
+module load gnu8/8.2.0
+
+./benchmark_col "col"

@@ -3,7 +3,7 @@
 # Commands specific to the job scheduler requesting resources, naming your job, and setting up email alerts regarding job status.
 #PBS -l nodes=1:ppn=8
 #PBS -l walltime=48:0:00
-#PBS -N runC
+#PBS -N blocked
 #PBS -S /bin/bash
 #PBS -j oe
 #PBS -m bae
@@ -17,23 +17,4 @@ module load openblas-0.2.20-gcc-4.8.5-gqori4j
 module load gsl-2.3-gcc-7.1.0-oqydlph
 module load gnu8/8.2.0
 
-# Run all the comparable algorithms
-./benchmark_naive "naive" &
-
-./benchmark_blocked "blocked" &
-
-./benchmark_genvect "genvect" &
-
-./benchmark_blas "blas" &
-
-./benchmark_autovect "autovect" &
-
-./benchmark_row "row" &
-
-./benchmark_copy "copy" &
-
-./benchmark_col "col" &
-
-./benchmark_rb "rb" &
-
-wait
+./benchmark_blocked "blocked"
