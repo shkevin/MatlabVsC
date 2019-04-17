@@ -26,6 +26,7 @@ experiment.wallTime = cell(length(sizes),1);
 experiment.sizes = sizes;
 experiment.iterations = iterations;
 experiment.runTime = seconds;
+experiment.ranSizes = nan(length(sizes),1);
 
 if toPlot
     figure, hold on
@@ -73,6 +74,7 @@ for s = randSizes
     experiment.wallTime{sizeIndex} = wallTimes;
     experiment.experimentTimes{sizeIndex} = experimentTimes;
     experiment.times{sizeIndex} = times;
+    experiment.ranTimes(sizeIndex) = s;
 end
 
 experiment.runTime = toc(total);
