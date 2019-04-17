@@ -27,6 +27,9 @@ objects : $(objects)
 benchmark_% : benchmark.o dgemm_%.o 
 	$(CC) $(OPT) -o $@ $^ $(LDLIBS)
 
+clean_folders :
+	rm -rf $(types)
+
 %.o : %.c
 	$(CC) -c $(CFLAGS) $<
 
