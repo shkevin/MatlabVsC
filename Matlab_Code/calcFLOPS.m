@@ -1,7 +1,5 @@
 function experiment = calcFLOPS(toPlot)
 
-maxNumCompThreads(1);
-
 if ~exist('toPlot','var') || isempty(toPlot)
     toPlot = false;
 end
@@ -36,7 +34,6 @@ end
 
 total = tic;
 for s = randSizes
-    times = zeros(length(iterations),1);
     seconds = 0;
     sizeIndex = find(sizes == s);
     
@@ -48,6 +45,7 @@ for s = randSizes
     A*B;
     
     iterationSize = iterations(sizeIndex);
+    times = zeros(iterationSize,1);
     wallTimes = zeros(iterationSize,numExperiment);
     experimentTimes = zeros(iterationSize,numExperiment);
     
@@ -76,7 +74,7 @@ for s = randSizes
     experiment.wallTime{sizeIndex} = wallTimes;
     experiment.experimentTimes{sizeIndex} = experimentTimes;
     experiment.times{sizeIndex} = times;
-    experiment.ranTimes(sizeIndex) = s;
+    experiment.ranSizes(sizeIndex) = s;
 end
 
 experiment.runTime = toc(total);
