@@ -11,14 +11,14 @@
 #PBS -V
 
 # Change to the directory that you submitted your PBS script from.
-cd $PBS_O_WORKDIR/users/shkevin/assignment3/Matlab_Code
+cd $PBS_O_WORKDIR
 
 # Loading the MATLAB software module. The specific module name is system dependent.
 module load matlab/R2017a
 
 # Calling MATLAB in batch mode to run your program.
-matlab -nodisplay -nosplash -nojvm -r < calcFLOPS.m > /dev/null &
+matlab -nodisplay -nosplash -nojvm -r calcFLOPS > /dev/null &
 
-matlab -nodisplay -nosplash -nojvm -r -singleCompThread < calcFLOPS.m > /dev/null &
+matlab -nodisplay -nosplash -nojvm -r -singleCompThread calcFLOPS > /dev/null &
 
 wait

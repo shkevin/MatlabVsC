@@ -11,7 +11,7 @@
 #PBS -V
 
 # Change to the directory that you submitted your PBS script from.
-cd $PBS_O_WORKDIR/users/shkevin/assignment3/CS533_Assignment3_Matmult
+cd $PBS_O_WORKDIR
 
 module load openblas-0.2.20-gcc-4.8.5-gqori4j
 module load gsl-2.3-gcc-7.1.0-oqydlph
