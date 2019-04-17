@@ -17,8 +17,8 @@ cd $PBS_O_WORKDIR
 module load matlab/R2017a
 
 # Calling MATLAB in batch mode to run your program.
-matlab -nodisplay -nosplash -nojvm -r calcFLOPS > /dev/null &
+# matlab -nodisplay -nosplash -nojvm -r calcFLOPS > /dev/null &
 
-matlab -nodisplay -nosplash -nojvm -r -singleCompThread calcFLOPS > /dev/null &
+matlab -nodisplay -nosplash -nojvm -r --use-single-comp-thread calcFLOPS > /dev/null &
 
 wait
