@@ -199,7 +199,7 @@ void create_folder(char *dirname)
 int main(int argc, char **argv)
 {
     int *test_sizes = NULL, nsizes, nmax;
-    int numExperiment = 3;
+    int numExperiment = 50;
     double cputime = 0;
     double walltime = 0;
     char cpu_filename[300];
