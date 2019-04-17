@@ -92,7 +92,7 @@ end
 defaultName = datetime;
 defaultName = strtrim(regexprep(string(defaultName),{'-',' ',':'},{'','_',''}));
 
-defaultFolder = './Matlab_Code/';
+defaultFolder = '/users/shkevin/assignment3/Matlab_Code';
 fullfileName = strcat(defaultFolder,defaultName);
 save(strcat(fullfileName,'.mat'), 'experiment');
 
