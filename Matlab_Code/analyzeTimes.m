@@ -52,6 +52,15 @@ title('Experiment Times')
 legend('Cpu Time','Wall Time','x^3')
 hold off
 
+% bar graph matlab algorithm
+vectors = cellfun(@transpose,cellfun(@sum,cpuTimes,'un',0),'un',0);
+cpu_means = cellfun(@mean,vectors)./8;
+
+vectors = cellfun(@transpose,cellfun(@sum,wallTimes,'un',0),'un',0);
+wall_means = cellfun(@mean,vectors);
+
+data = [cpu_means;wall_means];
+bar(data)
 
 end
 
