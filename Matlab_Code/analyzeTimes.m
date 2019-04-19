@@ -2,7 +2,7 @@ function analyzeTimes(experiment)
 
 
 sizes = experiment.sizes;
-assert(isequal(experiment.ranSizes,sizes),"These need to be equal!")
+assert(isequal(experiment.ranSizes,sizes'),"These need to be equal!")
 
 times = experiment.times;
 cpuTimes = experiment.experimentTimes;
@@ -19,7 +19,7 @@ cubic = @(x) x.^3;
 
 figure, hold on
 for s = 1:numSizes
-    timeAtSize = times{s};
+
     sAtStep = sizes(s);
     cpuTime = cpuTimes{s};
     wallTime = wallTimes{s};
@@ -46,7 +46,8 @@ for s = 1:numSizes
 %     loglog(xs,ys,'bo');
 % %     plot(logspace(1:10000),cubed,'go');
 end
-plot(1:10000,cubic(1:10000).*2e-10,'g-');
+factor = 2e-10;
+plot(1:10000,cubic(1:10000).*factor,'g-');
 xlabel('Size'),ylabel('Time (Seconds)');
 title('Experiment Times')
 legend('Cpu Time','Wall Time','x^3')
@@ -60,7 +61,7 @@ vectors = cellfun(@transpose,cellfun(@sum,wallTimes,'un',0),'un',0);
 wall_means = cellfun(@mean,vectors);
 
 data = [cpu_means;wall_means];
-bar(data)
+figure,bar(data)
 
 end
 
