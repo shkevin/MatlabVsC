@@ -288,12 +288,12 @@ int main(int argc, char **argv)
         fill(B, n * n);
         fill(C, n * n);
 
-        sprintf(cpu_filename, "%s/%d.txt", cpu_time,n);
-        sprintf(wall_filename, "%s/%d.txt", walltimeFold,n);
+        // sprintf(cpu_filename, "%s/%d.txt", cpu_time,n);
+        // sprintf(wall_filename, "%s/%d.txt", walltimeFold,n);
 
         // printf("\n");
-        cpufile = fopen(cpu_filename, "a");
-        wallfile = fopen(wall_filename, "a");
+        // cpufile = fopen(cpu_filename, "a");
+        // wallfile = fopen(wall_filename, "a");
 
         /* Warm-up cache for this size*/
         square_dgemm(n, (double (*)[])A, (double (*)[])B,
