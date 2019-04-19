@@ -127,10 +127,8 @@ int *process_sizes(char *arg, int *nitems, int *max)
 //     319, 320, 321, 417, 479, 480, 511, 512, 639, 640, 767, 768, 769,
 //         1538, 1539, 3078, 3079, 6158, 6159, 6160, 10000};
 
-// int all_sizes[] = {31,32,96,97,127,128,129,191,192,229,255,256,257,319,320,
-//          321,417,479,480,511,512,639,640,767,768,769,1000,3000,4000,10000};
-
-int all_sizes[] = {10000};
+int all_sizes[] = {31,32,96,97,127,128,129,191,192,229,255,256,257,319,320,
+         321,417,479,480,511,512,639,640,767,768,769,1000,3000,4000,10000};
 
 // int default_sizes[] =
 //  {31, 32, 96, 97, 127, 128, 129, 191, 192, 229, 255, 256, 257,
@@ -140,11 +138,8 @@ int all_sizes[] = {10000};
 // int default_sizes[] =
 //  {31, 32, 96, 97, 127, 128, 129, 191, 192, 229, 255, 256, 257,
 //     319, 320, 321, 417, 479, 480, 511, 512, 639, 640, 767};
-
-// int default_sizes[] = {31,32,96,97,127,128,129,191,192,229,255,256,257,319,320,
-//          321,417,479,480,511,512,639,640,767,768,769,1000,3000,4000,10000};
-
-int default_sizes[] = {10000};
+int default_sizes[] = {31,32,96,97,127,128,129,191,192,229,255,256,257,319,320,
+         321,417,479,480,511,512,639,640,767,768,769,1000,3000,4000,10000};
 
 // int default_sizes[] = {31,32,96,97,127,128,129,191,192,229,255,256,257,319,320,
 //          321,417,479,480,511,512,639,640,767,768,769,869,969,1069,1169,
@@ -221,8 +216,8 @@ int main(int argc, char **argv)
     int numExperiment = 5;
     double cputime = 0;
     double walltime = 0;
-    // char cpu_filename[300];
-    // char wall_filename[300];
+    char cpu_filename[300];
+    char wall_filename[300];
 
     test_sizes = default_sizes;
     nsizes = sizeof(default_sizes) / sizeof(default_sizes[0]);
@@ -231,29 +226,28 @@ int main(int argc, char **argv)
     // int iterations[] = {2000,1232,1231,1231,615,615,307,307,153,153,153,128,127,102,102,
     //       96,95,83,64,64,63,51,51,51,45,38,38,25,25,25,19,19,6,6};
 
-    // int iterations[] = {500,200,150,50,38,38,38,32,31,25,25,24,23,20,16,16,15,12,12,12,11,9,9,6,6,6,4,4,1,1};
-    int iterations[] = {1};
+    int iterations[] = {500,200,150,50,38,38,38,32,31,25,25,24,23,20,16,16,15,12,12,12,11,9,9,6,6,6,4,4,1,1};
 
     int iteration = 0;
 
-    // char parent[50];
-    // sprintf(parent, "./%s", argv[1]);
-    // create_folder(parent);
+    char parent[50];
+    sprintf(parent, "./%s", argv[1]);
+    create_folder(parent);
 
-    // char exp_str[75];
-    // sprintf(exp_str, "%s/%s", parent, "experimentInfo");
-    // create_folder(exp_str);
+    char exp_str[75];
+    sprintf(exp_str, "%s/%s", parent, "experimentInfo");
+    create_folder(exp_str);
 
-    // char cpu_time[200];
-    // sprintf(cpu_time, "%s/%s", exp_str, "cputime");
-    // create_folder(cpu_time);
+    char cpu_time[200];
+    sprintf(cpu_time, "%s/%s", exp_str, "cputime");
+    create_folder(cpu_time);
 
-    // char walltimeFold[200];
-    // sprintf(walltimeFold, "%s/%s", exp_str, "walltime");
-    // create_folder(walltimeFold);
+    char walltimeFold[200];
+    sprintf(walltimeFold, "%s/%s", exp_str, "walltime");
+    create_folder(walltimeFold);
 
-    // FILE *cpufile = NULL;
-    // FILE *wallfile = NULL;
+    FILE *cpufile = NULL;
+    FILE *wallfile = NULL;
 
     clock_t cpu_start, cpu_end;
 
@@ -288,12 +282,12 @@ int main(int argc, char **argv)
         fill(B, n * n);
         fill(C, n * n);
 
-        // sprintf(cpu_filename, "%s/%d.txt", cpu_time,n);
-        // sprintf(wall_filename, "%s/%d.txt", walltimeFold,n);
+        sprintf(cpu_filename, "%s/%d.txt", cpu_time,n);
+        sprintf(wall_filename, "%s/%d.txt", walltimeFold,n);
 
         // printf("\n");
-        // cpufile = fopen(cpu_filename, "a");
-        // wallfile = fopen(wall_filename, "a");
+        cpufile = fopen(cpu_filename, "a");
+        wallfile = fopen(wall_filename, "a");
 
         /* Warm-up cache for this size*/
         square_dgemm(n, (double (*)[])A, (double (*)[])B,
@@ -320,19 +314,17 @@ int main(int argc, char **argv)
                 cputime = ((double) (cpu_end - cpu_start)) / CLOCKS_PER_SEC;
                 walltime += wall_time();
                 // printf("%lf    ", cputime);
-                fprintf(stdout, "c %lf,",cputime);
-                fprintf(stdout, "w %lf,",walltime);
-                // fprintf(cpufile, "%lf,",cputime);
-                // fprintf(wallfile, "%lf,",walltime);
+                fprintf(cpufile, "%lf,",cputime);
+                fprintf(wallfile, "%lf,",walltime);
             }
             // printf("\n");
-            fprintf(stdout,"\n");
-            // fprintf(wallfile,"\n");
+            fprintf(cpufile,"\n");
+            fprintf(wallfile,"\n");
         }
         cputime = 0;
         walltime = 0;
-        // fclose(cpufile);
-        // fclose(wallfile);
+        fclose(cpufile);
+        fclose(wallfile);
     }
     free(buf);
 
