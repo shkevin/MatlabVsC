@@ -47,7 +47,7 @@ for s = 1:numSizes
 % %     plot(logspace(1:10000),cubed,'go');
 end
 factor = 2e-10;
-plot(1:10000,cubic(1:10000).*factor,'g-');
+plot(1:10000,cubic(1:10000).*factor,'g-','DisplayName','cubic reference');
 xlabel('Size'),ylabel('Time (Seconds)');
 title('Experiment Times')
 legend('Cpu Time','Wall Time','x^3')
