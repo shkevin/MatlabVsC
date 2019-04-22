@@ -1,4 +1,15 @@
 function experiment = calcFLOPS(toPlot)
+% Function:
+%   experiment = calcFLOPS(toPlot)
+%       Runs the experiments with the sizes for matlab's built in matrix
+%       multiplication.
+%
+% Input:
+%   toPlot: Boolean as to whether to plot every plot for this data set.
+%
+% Output:
+%   experiment: Struct containing data and experiment details.
+
 
 if ~exist('toPlot','var') || isempty(toPlot)
     toPlot = false;
@@ -18,6 +29,7 @@ b = 1;
 shuffle = @(v)v(randperm(numel(v)));
 randSizes = shuffle(sizes);
 
+% Create struct for experiment, set defaults.
 experiment = struct();
 experiment.times = cell(length(sizes),1);
 experiment.numExperiment = numExperiment;

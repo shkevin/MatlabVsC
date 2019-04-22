@@ -1,4 +1,14 @@
 function experiment = readCData(algorithm)
+% Function:
+%   experiment = readCData(algorithm)
+%       Reads in the desired C data simulation.
+%
+% Input:
+%   algorithm: String containing which algorithm folder to read in.
+%
+% Output:
+%   experiment: Struct containing data and experiment details.
+
 
 base = @(times)strcat('./CS533_Assignment3_Matmult/',algorithm,'/experimentInfo/',times);
 cpuPath = base('cputime');
@@ -8,7 +18,7 @@ wallPath = base('walltime');
 cpu_files = dir(fullfile(cpuPath,'*.txt'));
 wall_files = dir(fullfile(wallPath,'*.txt'));
 
-assert(isequal(length(cpu_files),length(wall_files)));
+% assert(isequal(length(cpu_files),length(wall_files)));
 
 n = length(cpu_files);
 data = cell(n,4);
@@ -29,7 +39,7 @@ end
 
 data = sortrows(data,2);
 
-assert(isequal(data(:,2),data(:,4)),"sizes need to be the same")
+% assert(isequal(data(:,2),data(:,4)),"sizes need to be the same")
 
 experiment = struct();
 experiment.experimentTimes = data(:,1);

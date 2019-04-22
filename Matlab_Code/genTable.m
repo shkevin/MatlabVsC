@@ -1,4 +1,17 @@
 function [T,best,speedups] = genTable()
+% Function:
+%   [T,best,speedups] = genTable()
+%       Generates tables of all of the data ran for this experiment.
+%
+% Input:
+%   -None-
+%
+% Output:
+%   T       : Table with the means of all algorithms.
+%   best    : Table of the best algorithms from the experiments.
+%   speedups: Table containing the speed-up and growth factor of the best
+%             algorithms.
+
 
 format short
 cols = {'Size','Matlab','Row','Blas','Col','Genvect','Autovect','Naive','Copy','Blocked'};
@@ -14,6 +27,7 @@ T{:,1} = sizes';
 
 base = './Matlab_Code/AllData/';
 
+% Load in all data to put into the tables.
 matlab = load(fullfile(base,'matlab'));
 row = load(fullfile(base,'row'));
 blas = load(fullfile(base,'blas'));
@@ -26,6 +40,7 @@ blocked = load(fullfile(base,'blocked'));
 
 meanIt = @(data) cellfun(@mean,cellfun(@mean, data,'un',0));
 
+% Extract the mean values for the data sets.
 T.Matlab = meanIt(matlab.matlab.experimentTimes);
 T.Row = meanIt(row.row.experimentTimes);
 T.Blas = meanIt(blas.blas.experimentTimes);
@@ -48,6 +63,8 @@ for alg = 2:length(cols)
         'MarkerSize',10,...
         'LineWidth',1);
 end
+
+% Produce the speedup table, calculate factors first.
 factor = @(x) mean(x{end})/(max(sizes)^3);
 
 colors = get(gca,'colororder');
@@ -64,7 +81,8 @@ factors{7} = factor(naive.naive.experimentTimes);
 factors{8} = factor(copy.copy.experimentTimes);
 factors{9} = factor(blocked.blocked.experimentTimes);
 
-plot(xs,ys.*factors{1},'Color',colors(2,:))
+% Plot the reference functions with relative growth factors.
+plot(xs,ys.*factors{1},'Color',colors(1,:))
 plot(xs,ys.*factors{2},'Color',colors(2,:))
 plot(xs,ys.*factors{3},'Color',colors(3,:))
 plot(xs,ys.*factors{4},'Color',colors(4,:))
@@ -83,29 +101,18 @@ hold off
 bestAlgs = unique(idx);
 sampleIdx = [1:5:30, 27:30];
 
+% Produce the table with the algorithms that produced the best cpu times.
 best = table();
 best.Size = T.Size(sampleIdx);
 best.Matlab = T.Matlab(sampleIdx,:);
 best.Copy = T.Copy(sampleIdx,:);
 best.Genvect = T.Genvect(sampleIdx,:);
 
+% Produce the speedup table.
 speedups = table();
 speedups.Algorithm = cols(2:end)';
 speedups.Growth_Factor = factors;
 speedups.Speed_Up = cell2mat(factors(:))./factors{1};
-
-% vectors = @(data) cellfun(@mean, cellfun(@transpose,cellfun(@sum,data,'un',0),'un',0));
-meanIt = @(x) cellfun(@mean,cellfun(@mean, x,'un',0));
-padthedata = @(x) [x;nan(2500-size(x,1),1)];
-
-index = 1;
-for i = sampleIdx
-    vals = matlab.matlab.experimentTimes{i};
-    data(:,index) = padthedata(vals(:));
-    index = index + 1;
-end
-
-boxplot(data,'Labels',sizes(sampleIdx))
 
 end
 
