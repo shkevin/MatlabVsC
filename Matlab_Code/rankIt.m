@@ -16,20 +16,17 @@ function ranks = rankIt(data)
 % Pulled from [1]
 dims = size(data);
 data = data(:);
-[~,p] = sort(data);
+[tmp,p] = sort(data);
 r = 1:length(data);
 r(p) = r;
 
 % Handle repeated values
 % Pulled from: [2]
 [~, uniqueIdx] = unique(data);
-duplicates = ismember(data,find(data(setdiff(1:numel(data), uniqueIdx))));
+duplicates = ismember(tmp,find(tmp(setdiff(1:numel(tmp), uniqueIdx))));
 
 % Determine if there were midranks that need to be calculated.
-if ~isempty(duplicates)
-    r(duplicates) = min(r(duplicates));
-    r = midRanks(r);
-end
+r = midRanks(data);
 ranks = reshape(r,dims);
 
 end
